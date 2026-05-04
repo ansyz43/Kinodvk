@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node server/index.mjs",
+    "start:prod": "node server/index.mjs",
     "dev": "node --watch server/index.mjs",
     "build": "echo \"no build step\""
   },
