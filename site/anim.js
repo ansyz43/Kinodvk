@@ -91,17 +91,18 @@
     { sel: '.partner-logos', items: '.partner-item' },
     { sel: '.about-pillars', items: '.pillar' },
     { sel: '.prog-grid', items: '.prog-event' },
+    { sel: '#archive .archive-grid', items: '.film-card' },
   ];
   grids.forEach(({ sel, items }) => {
-    const grid = document.querySelector(sel);
-    if (!grid) return;
-    gsap.from(grid.querySelectorAll(items), {
-      y: 50,
-      autoAlpha: 0,
-      duration: 0.63,
-      ease: 'power3.out',
-      stagger: 0.055,
-      scrollTrigger: { trigger: grid, start: 'top 80%', once: true },
+    document.querySelectorAll(sel).forEach((grid) => {
+      gsap.from(grid.querySelectorAll(items), {
+        y: 50,
+        autoAlpha: 0,
+        duration: 0.63,
+        ease: 'power3.out',
+        stagger: 0.055,
+        scrollTrigger: { trigger: grid, start: 'top 80%', once: true },
+      });
     });
   });
 
@@ -158,6 +159,6 @@
     card.addEventListener('mouseleave', onLeave);
   }
   if (window.matchMedia('(hover: hover)').matches) {
-    document.querySelectorAll('.nom-card, .news-card').forEach((c) => attachTilt(c, 5));
+    document.querySelectorAll('.nom-card, .news-card, .film-card').forEach((c) => attachTilt(c, 5));
   }
 })();

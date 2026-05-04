@@ -402,6 +402,90 @@ section{padding:100px 80px}
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
 
+/* ═══════════ ARCHIVE (НОМИНАНТЫ И ПОБЕДИТЕЛИ 2024 / 2025) ═══════════ */
+.archive{
+  background:var(--deep);
+  border-top:1px solid rgba(255,149,0,0.12);
+  position:relative;overflow:hidden;
+}
+.archive::before{
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(232,52,26,0.06) 0%,transparent 65%);
+  pointer-events:none;
+}
+.archive-head{max-width:760px;margin-bottom:64px}
+.archive-head .section-body{margin-top:14px;color:rgba(255,255,255,0.7)}
+.archive-year{margin-top:64px}
+.archive-year:first-of-type{margin-top:0}
+.archive-year-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  padding-bottom:20px;margin-bottom:32px;
+  border-bottom:1px solid rgba(255,149,0,0.18);
+  flex-wrap:wrap;
+}
+.archive-year-num{
+  font-family:'Bebas Neue',sans-serif;font-size:96px;line-height:0.9;
+  background:linear-gradient(135deg,#FFD000 0%,#FF9500 50%,#E8341A 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 24px rgba(255,149,0,0.25));
+}
+.archive-year-meta{
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.22em;
+  color:rgba(255,255,255,0.6);text-transform:uppercase;text-align:right;line-height:1.7;
+}
+.archive-year-meta b{color:var(--amber2);font-weight:400}
+.archive-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.film-card{
+  position:relative;background:var(--card);
+  padding:28px 26px 26px;
+  border:1px solid rgba(255,255,255,0.05);
+  transition:transform .3s,border-color .3s,background .3s;
+  display:flex;flex-direction:column;gap:14px;
+  overflow:hidden;
+}
+.film-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),var(--amber2));
+  transform:scaleX(0);transform-origin:left;transition:transform .4s ease;
+}
+.film-card:hover{transform:translateY(-4px);border-color:rgba(255,149,0,0.25);background:#181820}
+.film-card:hover::before{transform:scaleX(1)}
+.film-card.winner{border-color:rgba(255,149,0,0.35);background:linear-gradient(180deg,rgba(255,149,0,0.05) 0%,var(--card) 60%)}
+.film-card.winner::before{transform:scaleX(1)}
+.film-badge{
+  align-self:flex-start;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;
+  padding:6px 12px;border:1px solid rgba(255,149,0,0.4);color:var(--amber2);
+  background:rgba(255,149,0,0.08);
+}
+.film-cat{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.26em;
+  color:var(--amber2);text-transform:uppercase;
+}
+.film-title{
+  font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:0.02em;
+  color:var(--white);line-height:1.05;
+}
+.film-meta{
+  font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.55;color:rgba(255,255,255,0.78);
+  margin-top:auto;
+}
+.film-meta .film-region{
+  display:inline-block;margin-top:6px;
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;
+  color:rgba(255,208,0,0.85);text-transform:uppercase;
+}
+.archive-foot{
+  margin-top:48px;padding-top:24px;border-top:1px dashed rgba(255,255,255,0.08);
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;
+  color:rgba(255,255,255,0.45);text-transform:uppercase;line-height:1.7;
+}
+.archive-foot a{color:rgba(255,208,0,0.7);text-decoration:none;border-bottom:1px solid rgba(255,208,0,0.3)}
+.archive-foot a:hover{color:var(--amber2)}
+
 /* ═══════════ SUBMIT CTA ═══════════ */
 .submit-section{
   position:relative;overflow:hidden;
@@ -626,6 +710,9 @@ body.modal-open{overflow:hidden}
   .partner-logos{flex-direction:column}
   .partner-item{border-right:none;border-bottom:1px solid rgba(255,149,0,0.1)}
   .modal{padding:36px 24px}
+  .archive-grid{grid-template-columns:1fr 1fr}
+  .archive-year-num{font-size:72px}
+  .archive-year-meta{text-align:left;width:100%}
 }
 @media(max-width:560px){
   .hero{padding:90px 16px 50px}
@@ -641,6 +728,9 @@ body.modal-open{overflow:hidden}
   .stat-label{font-size:9px;letter-spacing:0.24em}
   .hero-aside-tag{font-size:9px;letter-spacing:0.24em;padding:8px 12px}
   .hero-aside-meta{font-size:8px;letter-spacing:0.26em}
+  .archive-grid{grid-template-columns:1fr}
+  .archive-year-num{font-size:60px}
+  .film-title{font-size:26px}
 }
 </style>
 </head>
@@ -659,6 +749,7 @@ body.modal-open{overflow:hidden}
     <li><a href="#about">О премии</a></li>
     <li><a href="#nominations">Номинации</a></li>
     <li><a href="#programme">Программа</a></li>
+    <li><a href="#archive">Архив</a></li>
     <li><a href="#news">Новости</a></li>
     <li><a href="#submit" class="nav-cta" data-lead-open>Подать заявку</a></li>
   </ul>
@@ -779,6 +870,171 @@ body.modal-open{overflow:hidden}
         <div class="prog-event"><span class="prog-time">16:00</span><div><div class="prog-name">Показы конкурсной программы</div><div class="prog-detail">Открытые сеансы для участников и зрителей</div></div></div>
         <div class="prog-event highlight"><span class="prog-time">19:30</span><div><div class="prog-name">Торжественная церемония награждения</div><div class="prog-detail">III Дальневосточная кинопремия · Хабаровск 2026</div></div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHIVE: НОМИНАНТЫ И ПОБЕДИТЕЛИ 2024 / 2025 -->
+<section class="archive" id="archive">
+  <div class="archive-head">
+    <div class="section-eyebrow">Архив сезонов · 2024–2025</div>
+    <h2 class="section-title">Номинанты<br>и <span class="hl">победители</span></h2>
+    <p class="section-body">Хроника двух сезонов Дальневосточной кинопремии. Лауреаты выбраны экспертным советом, в состав которого входят представители Минкультуры РФ, Союза кинематографистов России, Президентского фонда культурных инициатив, Киностудии им. М. Горького, Первого канала и других институтов отрасли.</p>
+  </div>
+
+  <!-- 2024 -->
+  <div class="archive-year">
+    <div class="archive-year-head">
+      <div class="archive-year-num">2024</div>
+      <div class="archive-year-meta">
+        I премия · 23 декабря 2024<br>
+        Москва · Площадка <b>КРДВ</b><br>
+        Награды вручила <b>Эльвира Нургалиева</b>, замглавы Минвостокразвития РФ
+      </div>
+    </div>
+    <div class="archive-grid">
+
+      <article class="film-card winner">
+        <div class="film-badge">Победитель · Главная номинация</div>
+        <div class="film-cat">Лучший полнометражный игровой, неигровой фильм или сериал</div>
+        <h3 class="film-title">«Огненный лис»</h3>
+        <div class="film-meta">
+          реж. Дмитрий Шпиленок<br>
+          продюсеры: Анна, Дмитрий и Пётр Шпиленок<br>
+          26 месяцев съёмок в Кроноцком заповеднике
+          <span class="film-region">Камчатский край</span>
+        </div>
+      </article>
+
+      <article class="film-card winner">
+        <div class="film-badge">Победитель</div>
+        <div class="film-cat">Лучший сценарий</div>
+        <h3 class="film-title">«Чип внутри меня»</h3>
+        <div class="film-meta">
+          режиссёр и автор сценария — Юлия Киселева.<br>
+          Действие — Москва и Медицинский центр ДВФУ
+          <span class="film-region">Москва · Владивосток</span>
+        </div>
+      </article>
+
+      <article class="film-card winner">
+        <div class="film-badge">Победитель</div>
+        <div class="film-cat">Лучший дебют</div>
+        <h3 class="film-title">«Далёкие близкие»</h3>
+        <div class="film-meta">
+          реж. Иван Соснин.<br>
+          История о героях, живущих в Хабаровске
+          <span class="film-region">Хабаровский край</span>
+        </div>
+      </article>
+
+      <article class="film-card winner">
+        <div class="film-badge">Победитель</div>
+        <div class="film-cat">Лучшая режиссёрская работа</div>
+        <h3 class="film-title">«Не хороните меня без Ивана»</h3>
+        <div class="film-meta">
+          реж. Любовь Борисова.<br>
+          Мистическое путешествие по дореволюционной Якутии
+          <span class="film-region">Республика Саха (Якутия)</span>
+        </div>
+      </article>
+
+      <article class="film-card winner">
+        <div class="film-badge">Спецприз оргкомитета</div>
+        <div class="film-cat">За вклад в развитие киноиндустрии Дальнего Востока</div>
+        <h3 class="film-title">ГНК «Сахафильм»</h3>
+        <div class="film-meta">
+          Государственная национальная кинокомпания — флагман якутского кино
+          <span class="film-region">Республика Саха (Якутия)</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- 2025 -->
+  <div class="archive-year">
+    <div class="archive-year-head">
+      <div class="archive-year-num">2025</div>
+      <div class="archive-year-meta">
+        II премия · 6 октября 2025<br>
+        Улан-Удэ · Русский драматический театр им. Н. А. Бестужева<br>
+        Шорт-лист — <b>21 картина</b> из 8 регионов ДФО · подано <b>77 заявок</b>
+      </div>
+    </div>
+    <div class="archive-grid">
+
+      <article class="film-card winner">
+        <div class="film-badge">Победитель · Главная номинация</div>
+        <div class="film-cat">Лучший фильм о Дальнем Востоке и Арктике</div>
+        <h3 class="film-title">«Легенды вечных снегов»</h3>
+        <div class="film-meta">
+          реж. Алексей Романов.<br>
+          Национальный киноэпос о судьбе и любви.<br>
+          Гран-при Казанского кинофестиваля, призёр NATIVE Film (Торонто)
+          <span class="film-region">Республика Саха (Якутия)</span>
+        </div>
+      </article>
+
+      <article class="film-card winner">
+        <div class="film-badge">Победитель</div>
+        <div class="film-cat">Лучший сценарий</div>
+        <h3 class="film-title">«Золото Умальты»</h3>
+        <div class="film-meta">
+          реж. Андрей Богатырёв, сцен. Ольга Погодина-Кузьмина.<br>
+          Истерн по мотивам реальной истории 1916 года
+          <span class="film-region">Хабаровский край</span>
+        </div>
+      </article>
+
+      <article class="film-card winner">
+        <div class="film-badge">Победитель</div>
+        <div class="film-cat">Лучший дебют</div>
+        <h3 class="film-title">«Испытание Севером»</h3>
+        <div class="film-meta">
+          реж. Дмитрий Панов.<br>
+          Документальный фильм о суровой природе Камчатки
+          <span class="film-region">Камчатский край</span>
+        </div>
+      </article>
+
+      <article class="film-card winner">
+        <div class="film-badge">Победитель</div>
+        <div class="film-cat">Лучшая режиссёрская работа</div>
+        <h3 class="film-title">«9 секунд»</h3>
+        <div class="film-meta">
+          реж. Олег Штром.<br>
+          Подвиг матроса Алдара Цыденжапова — съёмки в Агинском районе Бурятии и во Владивостоке
+          <span class="film-region">Бурятия · Приморье</span>
+        </div>
+      </article>
+
+      <article class="film-card winner">
+        <div class="film-badge">Победитель · Новая номинация</div>
+        <div class="film-cat">Лучший короткометражный / анимационный фильм</div>
+        <h3 class="film-title">«Мунха»</h3>
+        <div class="film-meta">
+          Якутская рисованная короткометражка о подлёдной рыбалке.<br>
+          Студия «Тооку» (НВК «Саха»)
+          <span class="film-region">Республика Саха (Якутия)</span>
+        </div>
+      </article>
+
+      <article class="film-card winner">
+        <div class="film-badge">Спецприз оргкомитета</div>
+        <div class="film-cat">За масштаб исторического высказывания</div>
+        <h3 class="film-title">«Челюскин. Первые»</h3>
+        <div class="film-meta">
+          реж. Степан Коршунов.<br>
+          Сериал об арктической экспедиции на льдинах
+          <span class="film-region">Арктика</span>
+        </div>
+      </article>
+
+    </div>
+    <div class="archive-foot">
+      Регионы шорт-листа 2025: Якутия · Хабаровский край · Камчатка · Забайкалье · Приморье · Бурятия · Сахалин · Чукотка<br>
+      Источники: пресс-релизы <a href="https://erdc.ru/" target="_blank" rel="noopener">КРДВ</a>, <a href="https://www.kinometro.ru/" target="_blank" rel="noopener">«Бюллетень кинопрокатчика»</a>, газета «Культура»
     </div>
   </div>
 </section>
