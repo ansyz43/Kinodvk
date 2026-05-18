@@ -134,6 +134,18 @@ body { padding-top: 84px; }
   box-shadow: 0 24px 48px rgba(0,0,0,0.12);
   z-index: 199;
 }
+/* Прозрачный мост между ссылкой и панелью — чтобы при движении курсора
+   через зазор между nav-link и mega-панелью hover не терялся. */
+.nav-mega::before {
+  content: ''; position: absolute;
+  top: -40px; left: 0; right: 0; height: 40px;
+  background: transparent; pointer-events: auto;
+}
+/* Каждый <li.has-mega> растягиваем на всю высоту nav, чтобы клик-зона
+   ссылки была от верха до низа шапки — и мышь не выпадала в "ничью" область. */
+.nav-links { align-items: stretch; }
+.nav-links > li { display: flex; align-items: center; }
+.nav-links > li.has-mega > a { padding: 30px 0; }
 .nav-links > li.has-mega:hover .nav-mega,
 .nav-links > li.has-mega:focus-within .nav-mega {
   opacity: 1; transform: translateY(0); pointer-events: auto;
