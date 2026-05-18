@@ -1268,14 +1268,19 @@ footer.split { padding: 0; background: var(--bg); color: var(--text); border-top
   background: var(--border); z-index: 3;
 }
 
-/* ════════════ DISCOVER — gold overlay панель внахлёст ════════════ */
+/* ════════════ DISCOVER — gold overlay панель, растянута до правого края ════════════ */
 .discover {
   background: var(--brand-gold); color: var(--brand-primary);
-  max-width: 720px; padding: 36px 40px 32px;
+  max-width: none; padding: 40px 96px 48px;
   margin: -120px 0 0 64px; position: relative; z-index: 5;
-  border: 1px solid rgba(28,25,21,0.12);
+  border-left: 1px solid rgba(28,25,21,0.12);
+  border-top: 1px solid rgba(28,25,21,0.12);
   box-shadow: 0 30px 80px rgba(0,0,0,0.28);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: 64px; align-items: start;
 }
+.discover > h3 { margin-bottom: 0; }
+.discover > ul { margin: 0; }
 .discover h3 {
   font-family: var(--font-serif); font-size: 32px; font-weight: 500;
   letter-spacing: -0.01em; margin-bottom: 18px; line-height: 1.1;
@@ -1419,4 +1424,53 @@ footer.split { padding: 0; background: var(--bg); color: var(--text); border-top
   .hero-collage::before { display: none; }
   .news-strip-light { padding: 64px 24px; }
   .partners-marquee .strip-head { padding: 0 24px; }
+  .discover { grid-template-columns: 1fr; gap: 24px; padding: 28px 24px 32px; margin: -80px 0 0; }
+  .discover > h3 { margin-bottom: 8px; }
+}
+
+/* ════════════ FULL-BLEED — снимаем center-max-width со всех inner-контейнеров ════════════ */
+/* Контент должен идти от края до края с edge-padding, а не центрироваться узкой колонкой. */
+.hero-content,
+.stats-strip-inner,
+.feat-news-inner,
+.edition-section .edition-line,
+.edition-section .edition-foot,
+.about-grid,
+.nom-header, .nom-header-text,
+.nom-grid, .nom-grid.nom-grid-six,
+.archive-head, .archive-year,
+.archive-grid,
+.news-strip-light .strip-head, .news-broken-grid,
+.partners-marquee .strip-head,
+.section-headline,
+.text-grid,
+.prose-block.wide,
+.strip-head, .press-rail, .rail-controls,
+.photo-head, .photo-rail,
+.prog-grid,
+.contact-grid,
+.steps-grid, .submit-options, .org-list,
+.policy-document,
+.footer-top, .footer-bottom,
+.footer-meta {
+  max-width: none !important;
+  margin-left: 0 !important; margin-right: 0 !important;
+}
+
+/* секции получают единый edge-padding слева/справа */
+section, .submit-section, .edition-section, footer.split,
+.news-strip-light, .partners-marquee, .photo-section, .press-strip,
+.feat-news, .stats-strip, .content-section, .page-section {
+  padding-left: 64px; padding-right: 64px;
+}
+.hero { padding-left: 0; padding-right: 0; }
+.feat-news { padding-left: 64px; padding-right: 64px; }
+.partners-marquee { padding-left: 0; padding-right: 0; }  /* marquee должен идти от края до края */
+footer.split { padding-left: 0; padding-right: 0; }
+@media (max-width: 900px) {
+  section, .submit-section, .edition-section,
+  .news-strip-light, .photo-section, .press-strip,
+  .feat-news, .stats-strip, .content-section, .page-section {
+    padding-left: 24px; padding-right: 24px;
+  }
 }
