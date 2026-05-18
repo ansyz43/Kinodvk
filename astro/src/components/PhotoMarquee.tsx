@@ -13,85 +13,43 @@ const defaultPhotos: Photo[] = [
   { image: "/assets/gallery/2024/3K6A3214_resized.jpg", title: "Шорт-лист 2024", meta: "I Дальневосточная кинопремия" },
 ];
 
-export default function PhotoMarquee({ photos = defaultPhotos, duration = 50 }: { photos?: Photo[]; duration?: number }) {
-  const doubled = useMemo(() => [...photos, ...photos], [photos]);
+export default function PhotoMarquee({ photos = defaultPhotos, duration = 60 }: { photos?: Photo[]; duration?: number }) {
+  // Дублируем массив один раз — track ширины 200%, анимация уходит на -50%, склейка незаметна.
+  const items = useMemo(() => [...photos, ...photos], [photos]);
 
   return (
-    <section
-      className="relative w-full overflow-hidden bg-bg py-20 md:py-28"
-      style={{ backgroundColor: "var(--bg)" }}
-    >
-      <div className="px-6 md:px-16 mb-14 flex items-end justify-between gap-6 flex-wrap">
+    <section className="photo-marquee-section">
+      <div className="photo-marquee-head">
         <div>
-          <div
-            className="font-sans text-[13px] tracking-[0.18em] uppercase mb-3"
-            style={{ color: "var(--brand-gold)", fontWeight: 600 }}
-          >
-            Фотоархив
-          </div>
-          <h2
-            className="font-serif font-medium text-[clamp(2rem,4vw,3.25rem)] leading-tight tracking-tight"
-            style={{ color: "var(--brand-primary)" }}
-          >
-            Прошлые церемонии
-          </h2>
+          <div className="section-eyebrow">Фотоархив</div>
+          <h2 className="section-title">Прошлые церемонии</h2>
         </div>
-        <p
-          className="font-sans text-base md:text-lg leading-relaxed max-w-md"
-          style={{ color: "var(--text-mid)" }}
-        >
+        <p className="photo-marquee-lead">
           Кадры первого и&nbsp;второго сезонов премии: деловая программа, площадки и&nbsp;церемония.
         </p>
       </div>
 
-      {/* edge fades */}
-      <div
-        className="pointer-events-none absolute top-0 bottom-0 left-0 z-10 w-32"
-        style={{ background: "linear-gradient(90deg, var(--bg), transparent)" }}
-      />
-      <div
-        className="pointer-events-none absolute top-0 bottom-0 right-0 z-10 w-32"
-        style={{ background: "linear-gradient(270deg, var(--bg), transparent)" }}
-      />
-
-      <div
-        className="group flex w-max gap-6 hover:[animation-play-state:paused]"
-        style={{
-          // Tailwind theme exposes animate-marquee with --marquee-duration var
-          animation: `marquee ${duration}s linear infinite`,
-        }}
-      >
-        {doubled.map((p, i) => (
-          <article
-            key={i}
-            className="relative shrink-0 w-[280px] md:w-[320px] aspect-[3/4] overflow-hidden rounded-2xl"
-            style={{ backgroundColor: "var(--bg-soft)" }}
-          >
-            <img
-              src={p.image}
-              alt={p.title}
-              loading="lazy"
-              className="h-full w-full object-cover grayscale transition-all duration-500 ease-out hover:grayscale-0 hover:scale-[1.03]"
-            />
-            <div
-              className="absolute bottom-3 left-3 right-3 rounded-lg px-3 py-2 backdrop-blur"
-              style={{ backgroundColor: "rgba(255,255,255,0.88)" }}
+      <div className="photo-marquee-wrap">
+        <div className="photo-marquee-fade photo-marquee-fade-l" />
+        <div className="photo-marquee-fade photo-marquee-fade-r" />
+        <div
+          className="photo-marquee-track"
+          style={{ animationDuration: `${duration}s` }}
+        >
+          {items.map((p, i) => (
+            <article
+              key={i}
+              className="photo-marquee-card"
+              aria-hidden={i >= photos.length ? true : undefined}
             >
-              <h3
-                className="font-sans text-[15px] font-semibold leading-tight"
-                style={{ color: "var(--brand-primary)" }}
-              >
-                {p.title}
-              </h3>
-              <p
-                className="font-sans text-[12px] mt-0.5"
-                style={{ color: "var(--text-soft)" }}
-              >
-                {p.meta}
-              </p>
-            </div>
-          </article>
-        ))}
+              <img src={p.image} alt={p.title} loading="lazy" />
+              <div className="photo-marquee-cap">
+                <h3>{p.title}</h3>
+                <p>{p.meta}</p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
