@@ -11,6 +11,51 @@
   }
 })();
 
+// Sticky nav — прячется при скролле вниз, появляется при скролле вверх и на hover
+(function () {
+  const nav = document.querySelector('nav.site-nav, nav');
+  if (!nav) return;
+  let lastY = window.scrollY;
+  let hovered = false;
+  const TOP_THRESHOLD = 80;
+  const DELTA = 6;
+
+  const update = () => {
+    const y = window.scrollY;
+    if (y <= TOP_THRESHOLD || hovered) {
+      nav.classList.remove('nav-hidden');
+      lastY = y; return;
+    }
+    if (Math.abs(y - lastY) < DELTA) return;
+    if (y > lastY) nav.classList.add('nav-hidden');
+    else nav.classList.remove('nav-hidden');
+    lastY = y;
+  };
+  window.addEventListener('scroll', update, { passive: true });
+
+  // hover-зона у верхнего края экрана возвращает шапку
+  const hoverZone = document.createElement('div');
+  hoverZone.style.cssText = 'position:fixed;top:0;left:0;right:0;height:24px;z-index:199;pointer-events:auto';
+  hoverZone.addEventListener('mouseenter', () => { hovered = true; nav.classList.remove('nav-hidden'); });
+  hoverZone.addEventListener('mouseleave', () => { hovered = false; });
+  nav.addEventListener('mouseenter', () => { hovered = true; });
+  nav.addEventListener('mouseleave', () => { hovered = false; });
+  document.body.appendChild(hoverZone);
+})();
+
+// Партнёры — клон-карусель: дублируем список для бесшовного marquee
+(function () {
+  document.querySelectorAll('[data-marquee]').forEach((track) => {
+    const items = Array.from(track.children);
+    if (!items.length) return;
+    items.forEach((el) => {
+      const clone = el.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+  });
+})();
+
 (function () {
   const modal = document.getElementById('leadModal');
   const form = document.getElementById('leadForm');
