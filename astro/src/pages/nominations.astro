@@ -1,25 +1,36 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const noms = [
+  { num: "I",   tag: "Полный метр",     title: "Лучший полнометражный фильм или сериал",      body: "Игровые, неигровые, анимационные. Вручается продюсеру картины. Хронометраж: от&nbsp;60&nbsp;минут для&nbsp;игровых, от&nbsp;52&nbsp;для&nbsp;неигровых." },
+  { num: "II",  tag: "Режиссура",       title: "Лучшая режиссёрская работа",                   body: "Награда режиссёру за&nbsp;выдающуюся постановочную работу в&nbsp;полнометражном игровом, неигровом, анимационном фильме или&nbsp;сериале." },
+  { num: "III", tag: "Сценарий",        title: "Лучший сценарий",                              body: "Приз сценаристу или&nbsp;сценарной группе полнометражного фильма или&nbsp;сериала." },
+  { num: "IV",  tag: "Дебют",           title: "Лучший дебют",                                 body: "Присуждается кинематографисту-дебютанту, чья первая работа признана наиболее успешной." },
+  { num: "V",   tag: "Короткий метр",   title: "Лучший короткометражный фильм",                body: "Игровые, неигровые, анимационные. До&nbsp;60&nbsp;минут для&nbsp;игровых, до&nbsp;52&nbsp;для&nbsp;неигровых." },
+  { num: "VI",  tag: "Спец. приз",      title: "За вклад в развитие киноиндустрии ДВ",         body: "Специальный приз оргкомитета для&nbsp;профессионалов и&nbsp;организаций, внёсших значимый вклад в&nbsp;развитие кино региона." },
+  { num: "VII", tag: "Арктика · NEW",   title: "За лучший фильм об Арктике и Крайнем Севере",  body: "Новая номинация сезона 2026. Для&nbsp;игровых и&nbsp;неигровых работ, снятых в&nbsp;Заполярье или&nbsp;посвящённых жизни и&nbsp;культуре северных регионов." },
+];
 ---
 <Layout title={`Номинации · Дальневосточная Кинопремия 2026`} active={"nominations"}>
 
-<section class="page-hero">
-  
-  <div class="section-headline">
-    <div class="section-eyebrow">Номинации</div>
-    <h2 class="section-title">Номинации <span class="hl">2026</span></h2>
-    <p class="section-body">Победители определяются в шести категориях. Перечень номинаций может уточняться решением оргкомитета.</p>
-  </div>
+<section class="page-hero v2">
+  <div class="page-hero-eyebrow"><span class="dot"></span><span>Номинации 2026</span></div>
+  <h1 class="page-hero-title" data-text-reveal>Семь <em>категорий</em><br />одной премии</h1>
+  <p class="page-hero-lead">На&nbsp;соискание принимаются игровые, неигровые и&nbsp;анимационные фильмы, сериалы и&nbsp;короткометражные работы, связанные с&nbsp;Дальневосточным федеральным округом. В&nbsp;2026 году добавлена новая номинация «Арктика».</p>
 </section>
-<section class="nominations page-section">
-  
-  <div class="nom-grid nom-grid-six">
-    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">I</div><div class="nom-title">Лучший полнометражный игровой, неигровой, анимационный фильм или сериал</div><p class="nom-desc">Вручается продюсеру картины. Хронометраж: от 60 минут для игровых, от 52 минут для неигровых.</p></div>
-    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">II</div><div class="nom-title">Лучшая режиссёрская работа</div><p class="nom-desc">Награда режиссёру за выдающуюся постановочную работу в полнометражном игровом, неигровом, анимационном фильме или сериале.</p></div>
-    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">III</div><div class="nom-title">Лучший сценарий</div><p class="nom-desc">Приз сценаристу или сценарной группе полнометражного игрового, неигрового, анимационного фильма или сериала.</p></div>
-    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">IV</div><div class="nom-title">Лучший дебют</div><p class="nom-desc">Присуждается кинематографисту-дебютанту, чья первая работа в полном метре или сериале признана наиболее успешной.</p></div>
-    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">V</div><div class="nom-title">Лучший короткометражный игровой, неигровой или анимационный фильм</div><p class="nom-desc">Вручается продюсеру короткометражной картины: до 60 минут для игровых, до 52 минут для неигровых.</p></div>
-    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">VI</div><div class="nom-title">За вклад в развитие киноиндустрии Дальнего Востока</div><p class="nom-desc">Специальный приз оргкомитета для профессионалов и организаций, внёсших значимый вклад в развитие кино региона.</p></div>
+
+<section class="nominations nominations-v2 reveal" style="padding-top:64px">
+  <div class="nom-list reveal-stagger">
+    {noms.map((n) => (
+      <article class="nom-row">
+        <div class="nom-num">{n.num}</div>
+        <div class="nom-body">
+          <h3 set:html={n.title}></h3>
+          <p set:html={n.body}></p>
+        </div>
+        <div class="nom-meta">{n.tag}</div>
+      </article>
+    ))}
   </div>
 </section>
 

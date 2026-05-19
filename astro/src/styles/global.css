@@ -14,8 +14,8 @@
   --color-text-mid:      #333333;
   --color-text-soft:     #69727d;
   --color-border:        #dad8d6;
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-serif: 'Playfair Display', 'Times New Roman', serif;
+  --font-sans: 'Inter Tight', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Fraunces', 'Marcellus', 'Times New Roman', serif;
   --animate-marquee:          marquee var(--marquee-duration, 40s) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--marquee-duration, 40s) linear infinite;
   /* shadcn/ui compat tokens (для верстки 21st-dev компонентов как-есть) */

@@ -1,21 +1,36 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const slots = [
+  { num: "01", role: "Председатель совета", note: "Кинокритик / куратор фестивальной программы" },
+  { num: "02", role: "Игровое кино",        note: "Режиссёр / продюсер региональных проектов" },
+  { num: "03", role: "Неигровое кино",      note: "Документалист, опыт работы с ДВ-материалом" },
+  { num: "04", role: "Анимация",            note: "Художник или продюсер анимационных проектов" },
+  { num: "05", role: "Короткий метр",       note: "Опыт фестивального отбора короткого метра" },
+  { num: "06", role: "Региональная экспертиза", note: "Журналист или киновед, специалист по ДВ" },
+  { num: "07", role: "Индустрия Арктики",   note: "Спец. член совета — для новой номинации 2026" },
+];
 ---
 <Layout title={`Экспертный совет · Дальневосточная Кинопремия 2026`} active={"expert-council"}>
 
-<section class="page-hero">
-  
-  <div class="section-headline">
-    <div class="section-eyebrow">Экспертный совет</div>
-    <h2 class="section-title">Состав<br><span class="hl">формируется</span></h2>
-    <p class="section-body">Состав Экспертного совета 2026 года находится на стадии формирования и будет опубликован после утверждения оргкомитетом.</p>
-  </div>
+<section class="page-hero v2">
+  <div class="page-hero-eyebrow"><span class="dot"></span><span>Экспертный совет</span></div>
+  <h1 class="page-hero-title" data-text-reveal>Кто <em>отбирает</em> фильмы</h1>
+  <p class="page-hero-lead">Состав совета будет опубликован после утверждения оргкомитетом. Здесь — структура и&nbsp;области экспертизы каждого слота. В&nbsp;2026 году добавлен новый слот — Арктика.</p>
 </section>
-<section class="content-section">
-  <div class="prose-block wide">
-    <h3>О совете</h3>
-    <p>В предыдущие годы в совет входили ведущие режиссёры, продюсеры, киноведы и представители институтов развития Дальнего Востока. Совет определяет победителей по заявленным номинациям на основе шорт-листа.</p>
-  </div>
+
+<section class="people-list reveal-stagger">
+  {slots.map((s) => (
+    <article class="people-row">
+      <div class="people-row-num">{s.num}</div>
+      <div class="people-row-body">
+        <div class="people-row-role">{s.role}</div>
+        <h3 class="people-row-name">Будет объявлено</h3>
+        <div class="people-row-note">{s.note}</div>
+      </div>
+      <div class="people-row-tag">Сезон 2026</div>
+    </article>
+  ))}
 </section>
 
 </Layout>
