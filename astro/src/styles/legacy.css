@@ -1975,6 +1975,19 @@ footer.split { padding: 0; background: var(--bg); color: var(--text); border-top
   transition: color .35s ease;
 }
 .partner-row:hover .partner-row-abbr { color: var(--brand-gold); }
+/* PNG-логотип на странице /partners — крупно слева, grayscale в покое */
+.partner-row-logo {
+  height: clamp(72px, 8vw, 112px); width: auto; max-width: 200px;
+  object-fit: contain;
+  filter: grayscale(0.5);
+  opacity: 0.85;
+  transition: filter .35s ease, opacity .35s ease, transform .35s ease;
+}
+.partner-row:hover .partner-row-logo {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: scale(1.04);
+}
 .partner-row-name {
   font-family: var(--font-serif); font-size: clamp(20px, 1.6vw, 26px);
   color: var(--brand-primary); font-weight: 500; line-height: 1.25;
@@ -3340,6 +3353,19 @@ footer.split { padding: 0; background: var(--bg); color: var(--text); border-top
   font-weight: 500; opacity: 0.75; transition: opacity .2s;
 }
 .partners-track .partner-item:hover .partner-abbr { opacity: 1; }
+/* PNG-логотип внутри marquee — высота фиксирована, ширина авто */
+.partners-track .partner-logo-img {
+  height: 56px; width: auto; max-width: 180px;
+  object-fit: contain;
+  filter: grayscale(0.4);
+  opacity: 0.78;
+  transition: filter .35s ease, opacity .35s ease, transform .35s ease;
+}
+.partners-track .partner-item:hover .partner-logo-img {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: scale(1.04);
+}
 .partners-track .partner-name {
   font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.08em;
   color: var(--text-soft); text-align: center; white-space: nowrap;
