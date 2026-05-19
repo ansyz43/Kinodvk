@@ -1,5 +1,36 @@
 // Общая логика сайта: мобильное меню, модалка контакта, отправка /api/lead, простые горизонтальные ленты.
 
+// Mega-menu с hover-intent — 350ms grace, чтобы курсор не закрывал панель моментально
+(function () {
+  const items = document.querySelectorAll('.nav-links > li.has-mega');
+  if (!items.length) return;
+  const GRACE = 350;
+  items.forEach((li) => {
+    let t = null;
+    const open = () => {
+      clearTimeout(t);
+      // закрываем остальные открытые
+      items.forEach((other) => { if (other !== li) other.classList.remove('is-mega-open'); });
+      li.classList.add('is-mega-open');
+    };
+    const close = () => {
+      clearTimeout(t);
+      t = setTimeout(() => li.classList.remove('is-mega-open'), GRACE);
+    };
+    li.addEventListener('mouseenter', open);
+    li.addEventListener('mouseleave', close);
+    // focus-within для клавиатуры
+    li.addEventListener('focusin', open);
+    li.addEventListener('focusout', (e) => {
+      if (!li.contains(e.relatedTarget)) close();
+    });
+  });
+  // Esc закрывает всё
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') items.forEach((li) => li.classList.remove('is-mega-open'));
+  });
+})();
+
 // Accordion (мастер-классы на /program) — раскрывает/сворачивает .acc-body
 (function () {
   document.querySelectorAll('[data-acc-toggle]').forEach((btn) => {
