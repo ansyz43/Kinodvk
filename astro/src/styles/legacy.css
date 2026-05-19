@@ -3032,19 +3032,30 @@ footer.split { padding: 0; background: var(--bg); color: var(--text); border-top
   .archive-photos-head { padding: 0 24px; }
 }
 
-/* Декоративные линии на странице с bento */
+/* Декоративные линии — от края до края viewport */
 .bento-6.with-lines { position: relative; }
+/* Горизонтальная gold-линия сверху секции — full bleed */
 .bento-6.with-lines::before {
   content: ''; position: absolute;
-  top: 40px; left: 50%; transform: translateX(-50%);
-  width: 1px; height: 80px; background: var(--brand-gold); opacity: 0.5;
+  top: 16px; left: 0; right: 0; height: 1px;
+  background: var(--brand-gold); opacity: 0.5;
+  z-index: 0;
 }
+/* Горизонтальная чёрная линия снизу — full bleed */
 .bento-6.with-lines::after {
   content: ''; position: absolute;
-  bottom: 60px; left: 64px; right: 64px; height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--brand-gold) 30%, var(--brand-gold) 70%, transparent 100%);
-  opacity: 0.4;
+  bottom: -16px; left: 0; right: 0; height: 1px;
+  background: var(--brand-primary); opacity: 0.25;
+  z-index: 0;
 }
+/* Вертикальный gold-маркер 80px по центру сверху, на 0 z-index не задевает карточки */
+.bento-6.with-lines > .bento-vline {
+  position: absolute; top: -32px; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 56px; background: var(--brand-gold); opacity: 0.7;
+  z-index: 1;
+}
+/* На страницах с several bento блоков (например /program) — линии между ними */
+.program-day .bento-6.with-lines::after { display: none; }  /* footer-линия не дублируется со spine */
 
 /* ════════ Subscribe panel — gold overlay (как Discover, упирается сверху в footer) ════════ */
 .subscribe-panel {
