@@ -2382,6 +2382,9 @@ footer.split { padding: 0; background: var(--bg); color: var(--text); border-top
 .submit-alt-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
 }
+.submit-alt-grid.single {
+  grid-template-columns: 1fr; max-width: 720px; margin: 0 auto;
+}
 .submit-alt-card {
   background: var(--bg); border: 1px solid var(--border);
   padding: 32px 28px;
