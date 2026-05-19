@@ -1,53 +1,48 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ArchiveBento from "../components/ui/archive-bento";
-import PhotoMarquee from "../components/PhotoMarquee.tsx";
 
-type Film = { cat: string; title: string; meta: string; region?: string; winner?: boolean; big?: boolean; img?: string };
+type Winner = {
+  num: string;        // I, II, III, IV, V, VI
+  cat: string;        // короткая категория
+  title: string;
+  author: string;
+  year: string;
+  region: string;
+  winner?: boolean;   // подсветка Winner
+  img?: string;       // фото-карточка
+};
 
-type Year = { num: string; label: string; place: string; date: string; films: Film[] };
+type Album = { year: string; label: string; place: string; date: string; cover: string; winners: Winner[] };
 
-const years: Year[] = [
+const albums: Album[] = [
   {
-    num: "2024",
+    year: "2024",
     label: "I сезон",
     place: "Москва",
     date: "Декабрь 2024",
-    films: [
-      { cat: "Лучший полнометражный фильм", title: "Сто лет тому вперёд", meta: "Алексей Нужный · 2024", region: "Якутия / Приморье", winner: true, big: true, img: "/assets/gallery/2024/3K6A1474_resized.jpg" },
-      { cat: "Лучшая режиссёрская работа",  title: "Айта", meta: "Степан Бурнашёв · 2022", region: "Якутия", winner: true, img: "/assets/gallery/2024/3K6A2040_resized.jpg" },
-      { cat: "Лучший сценарий", title: "Не одна дома", meta: "Радда Новикова · 2023", region: "Сахалин" },
-      { cat: "Лучший дебют", title: "Куба, Куба", meta: "Кирилл Кравченко · 2024", region: "Приморье" },
-      { cat: "Лучший короткометражный фильм", title: "Тойук", meta: "Виктор Аммосов · 2023", region: "Якутия" },
-      { cat: "За вклад в развитие", title: "Дмитрий Давыденко", meta: "Продюсер · Якутск", region: "Якутия", winner: true },
+    cover: "/assets/gallery/2024/3K6A1474_resized.jpg",
+    winners: [
+      { num: "I",   cat: "Полный метр",       title: "Сто лет тому вперёд", author: "Алексей Нужный", year: "2024", region: "Якутия / Приморье", winner: true, img: "/assets/gallery/2024/3K6A2040_resized.jpg" },
+      { num: "II",  cat: "Режиссура",         title: "Айта",                author: "Степан Бурнашёв", year: "2022", region: "Якутия", winner: true, img: "/assets/gallery/2024/3K6A2829_resized.jpg" },
+      { num: "III", cat: "Сценарий",          title: "Не одна дома",        author: "Радда Новикова", year: "2023", region: "Сахалин", img: "/assets/gallery/2024/3K6A1134_resized.jpg" },
+      { num: "IV",  cat: "Дебют",             title: "Куба, Куба",          author: "Кирилл Кравченко", year: "2024", region: "Приморье", img: "/assets/gallery/2024/3K6A3214_resized.jpg" },
+      { num: "V",   cat: "Короткий метр",     title: "Тойук",               author: "Виктор Аммосов", year: "2023", region: "Якутия", img: "/assets/gallery/2024/3K6A3186_resized.jpg" },
+      { num: "VI",  cat: "За вклад в развитие", title: "Дмитрий Давыденко", author: "Продюсер", year: "Якутск", region: "Якутия", winner: true, img: "/assets/gallery/2024/3K6A1474_resized.jpg" },
     ],
   },
   {
-    num: "2025",
+    year: "2025",
     label: "II сезон",
     place: "Улан-Удэ",
     date: "Сентябрь 2025",
-    films: [
-      { cat: "Лучший полнометражный фильм", title: "Огонь",  meta: "Алексей Нужный · 2024", region: "Камчатка", winner: true, big: true, img: "/assets/gallery/2025/LX3A5728_resized.jpg" },
-      { cat: "Лучшая режиссёрская работа",  title: "Чёрная молния возвращается", meta: "Дмитрий Давыдов · 2024", region: "Якутия", winner: true, img: "/assets/gallery/2025/LX3A5746_resized.jpg" },
-      { cat: "Лучший сценарий", title: "Бэлэх", meta: "Степан Бурнашёв · 2024", region: "Якутия" },
-      { cat: "Лучший дебют", title: "Триозёрск", meta: "Сергей Кузнецов · 2024", region: "Хабаровск" },
-      { cat: "Лучший короткометражный фильм", title: "Куда мы едем", meta: "Татьяна Эверстова · 2024", region: "Якутия" },
-      { cat: "За вклад в развитие", title: "Алёна Шумакова", meta: "Программный директор · Бурятия", region: "Бурятия", winner: true },
-    ],
-  },
-  {
-    num: "2026",
-    label: "III сезон",
-    place: "Хабаровск",
-    date: "25 сентября 2026",
-    films: [
-      { cat: "Полный метр", title: "Шорт-лист откроется в&nbsp;июне", meta: "После приёма заявок", big: true },
-      { cat: "Режиссура",   title: "Шорт-лист откроется в&nbsp;июне", meta: "После приёма заявок" },
-      { cat: "Сценарий",    title: "Шорт-лист откроется в&nbsp;июне", meta: "После приёма заявок" },
-      { cat: "Дебют",       title: "Шорт-лист откроется в&nbsp;июне", meta: "После приёма заявок" },
-      { cat: "Короткий метр", title: "Шорт-лист откроется в&nbsp;июне", meta: "После приёма заявок" },
-      { cat: "Арктика — новая номинация", title: "Шорт-лист откроется в&nbsp;июне", meta: "Фильмы о&nbsp;Крайнем Севере" },
+    cover: "/assets/gallery/2025/LX3A5728_resized.jpg",
+    winners: [
+      { num: "I",   cat: "Полный метр",       title: "Огонь",                      author: "Алексей Нужный", year: "2024", region: "Камчатка", winner: true, img: "/assets/gallery/2025/LX3A5746_resized.jpg" },
+      { num: "II",  cat: "Режиссура",         title: "Чёрная молния возвращается", author: "Дмитрий Давыдов", year: "2024", region: "Якутия", winner: true, img: "/assets/gallery/2025/LX3A6180_resized.jpg" },
+      { num: "III", cat: "Сценарий",          title: "Бэлэх",                       author: "Степан Бурнашёв", year: "2024", region: "Якутия", img: "/assets/gallery/2025/LX3A6615_resized.jpg" },
+      { num: "IV",  cat: "Дебют",             title: "Триозёрск",                   author: "Сергей Кузнецов", year: "2024", region: "Хабаровск", img: "/assets/gallery/2025/LX3A5732_resized.jpg" },
+      { num: "V",   cat: "Короткий метр",     title: "Куда мы едем",                author: "Татьяна Эверстова", year: "2024", region: "Якутия", img: "/assets/gallery/2025/LX3A5740_resized.jpg" },
+      { num: "VI",  cat: "За вклад",          title: "Алёна Шумакова",              author: "Программный директор", year: "Бурятия", region: "Бурятия", winner: true, img: "/assets/gallery/2025/LX3A5765_resized.jpg" },
     ],
   },
 ];
@@ -56,46 +51,56 @@ const years: Year[] = [
 
 <section class="page-hero v2">
   <div class="page-hero-eyebrow"><span class="dot"></span><span>Архив победителей</span></div>
-  <h1 class="page-hero-title" data-text-reveal>Три <em>сезона</em></h1>
-  <p class="page-hero-lead">Шорт-листы и&nbsp;победители прошедших церемоний. Сезон 2026 откроется после приёма заявок и&nbsp;работы экспертного совета.</p>
+  <h1 class="page-hero-title" data-text-reveal>Два <em>сезона</em></h1>
+  <p class="page-hero-lead">Шорт-листы и&nbsp;победители прошедших церемоний — I&nbsp;сезон в&nbsp;Москве (2024) и&nbsp;II&nbsp;сезон в&nbsp;Улан-Удэ (2025). Сезон III&nbsp;откроется после приёма заявок 2026.</p>
 </section>
 
-<div class="archive-layout">
-  <aside class="year-scrubber" data-year-scrubber>
-    <div class="year-scrubber-label">Сезоны</div>
-    {years.map((y) => (
-      <button type="button" data-year-target={"#year-" + y.num} class="year-scrubber-btn">
-        <span class="year-scrubber-num">{y.num}</span>
-        <span class="year-scrubber-place">{y.place}</span>
-      </button>
-    ))}
-  </aside>
+<!-- Year scrubber slider -->
+<nav class="archive-nav-pills">
+  {albums.map((a) => (
+    <a href={"#year-" + a.year} class="archive-nav-pill">
+      <span class="archive-nav-pill-year">{a.year}</span>
+      <span class="archive-nav-pill-place">{a.place}</span>
+    </a>
+  ))}
+</nav>
 
-  <div class="archive-years">
-    {years.map((y) => (
-      <section class="archive-year-block" id={"year-" + y.num}>
-        <header class="archive-year-head-v2">
-          <div class="archive-year-mark">
-            <span class="archive-year-num-big">{y.num}</span>
-            <span class="archive-year-label">{y.label} · {y.place}</span>
+{albums.map((album, ai) => (
+  <article class={"album reveal" + (ai % 2 ? " album-flip" : "")} id={"year-" + album.year}>
+
+    <!-- Cover hero -->
+    <header class="album-cover">
+      <img src={album.cover} alt={album.label} class="album-cover-img" />
+      <div class="album-cover-overlay">
+        <div class="album-cover-eyebrow">
+          <span class="dot"></span>
+          <span>{album.label} · {album.place}</span>
+        </div>
+        <h2 class="album-cover-year">{album.year}</h2>
+        <div class="album-cover-date">{album.date}</div>
+      </div>
+    </header>
+
+    <!-- Winners — magazine alternating layout -->
+    <div class="album-winners">
+      {album.winners.map((w, i) => (
+        <article class={"album-winner" + (i % 2 ? " flip" : "") + (w.winner ? " is-winner" : "")}>
+          <div class="album-winner-photo">
+            {w.img && <img src={w.img} alt={w.title} loading="lazy" />}
+            <div class="album-winner-num">{w.num}</div>
+            {w.winner && <div class="album-winner-badge">Winner</div>}
           </div>
-          <div class="archive-year-date">{y.date}</div>
-        </header>
+          <div class="album-winner-body">
+            <div class="album-winner-cat">{w.cat}</div>
+            <h3 class="album-winner-title">{w.title}</h3>
+            <div class="album-winner-author">{w.author} · {w.year}</div>
+            <div class="album-winner-region">Регион — {w.region}</div>
+          </div>
+        </article>
+      ))}
+    </div>
 
-        <ArchiveBento year={y.num as "2024" | "2025" | "2026"} client:visible />
-      </section>
-    ))}
-  </div>
-</div>
-
-<!-- Отдельная секция: фотогалерея с предыдущих церемоний -->
-<section class="archive-photos reveal">
-  <header class="archive-photos-head">
-    <div class="page-hero-eyebrow"><span class="dot"></span><span>Фотоархив</span></div>
-    <h2>Фотографии <em>предыдущих</em> церемоний</h2>
-    <p>Кадры I и II сезонов: деловая программа, площадки, церемония вручения.</p>
-  </header>
-  <PhotoMarquee client:visible />
-</section>
+  </article>
+))}
 
 </Layout>
